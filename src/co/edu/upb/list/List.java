@@ -6,6 +6,7 @@ public class List implements ListInterface {
 
     public ListNode head;
     public ListNode tail;
+    public int cont = 0;
 
     public List() {
         this.head = null;
@@ -29,12 +30,14 @@ public class List implements ListInterface {
     @Override
     public int getSize() {
         //to do
-        return 0;
+
+        return cont;
     }
 
     @Override
     public void clear() {
         //to do
+        cont = 0;
     }
 
     @Override
@@ -51,14 +54,24 @@ public class List implements ListInterface {
     public Object get(ListNode node) {
 
         ListNode actual = this.head;
-        while (actual.next != null){
-            if(actual.toString().equals(node.toString())){ //si lo encuentra
-                return actual.getObject();
-            }else {
-                actual = actual.next;
+
+        while (true){
+            if(actual.next != null){
+                if(actual.toString().equals(node.toString())){
+                    return actual.getObject();
+                }
+                else{
+                    actual = actual.next;
+                }
+            }else{//si va en el ultimo
+                if(actual.toString().equals(node.toString())){
+                    return actual.getObject();
+                }else{
+                    System.out.println("Ese objeto no se encuentra en la lista");
+                    return null;
+                }
             }
         }
-        return null;
     }
 
     @Override
@@ -72,9 +85,13 @@ public class List implements ListInterface {
                 else{
                     return nodoVar;
                 }
-            }else{
-                System.out.println("Ese objeto no se encuentra en la lista");
-                return null;
+            }else{//si va en el ultimo
+                if(nodoVar.getObject().equals(object)){
+                    return nodoVar;
+                }else{
+                    System.out.println("Ese objeto no se encuentra en la lista");
+                    return null;
+                }
             }
         }
     }
@@ -87,6 +104,7 @@ public class List implements ListInterface {
     @Override
     public boolean insert(ListNode node, Object object) {
         //to do
+        cont += 1;
         return false;
     }
 
@@ -98,6 +116,7 @@ public class List implements ListInterface {
         try {
             if(isEmpty()){
                 System.out.println("No hay objetos en la lista");
+                return false;
             }else{
                 ListNode anterior = search(nodoAtras);
                 if (anterior==null){
@@ -108,10 +127,11 @@ public class List implements ListInterface {
 
                     nuevoNodo.next = anterior.next;
                     anterior.next = nuevoNodo;
-                }
 
+                    cont += 1;
+                    return true;
+                }
             }
-            return true;
         }catch (NullPointerException e){
             System.out.println("Algo está nulo al remover: " + e);
             return false;
@@ -132,8 +152,8 @@ public class List implements ListInterface {
             }else{
                 newHead.next = this.head;
                 head = newHead;
-                return true;
             }
+            cont += 1;
             return true;
         }catch (Exception e){
             System.out.println("Hubo un error al insertar por la cabeza el elemento");
@@ -151,6 +171,7 @@ public class List implements ListInterface {
                 tail.next = new ListNode(object);
                 tail = tail.next;
             }
+            cont += 1;
             return true;
         }catch (NullPointerException e){
             System.out.println("Algo está nulo al agregar: " + e);
@@ -172,6 +193,7 @@ public class List implements ListInterface {
         try {
             if(isEmpty()){
                 System.out.println("No hay nada que eliminar");
+                return false;
             }else{
                 ListNode actual = this.head;
                 ListNode anterior = null;
@@ -189,8 +211,9 @@ public class List implements ListInterface {
 
                 actual = null;
 
+                cont -= 1;
+                return true;
             }
-            return true;
         }catch (NullPointerException e){
             System.out.println("Algo está nulo al remover: " + e);
             return false;

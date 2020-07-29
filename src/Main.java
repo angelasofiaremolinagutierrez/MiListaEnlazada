@@ -14,10 +14,13 @@ public class Main {
 
         System.out.println(printList(prueba));
         System.out.println('\n');
-        System.out.println(prueba.insertInFront(4,3));
+        System.out.println(prueba.insert(4,3));
         //System.out.println(prueba.remove(2));
         System.out.println('\n');
         System.out.println(printList(prueba));
+
+
+        System.out.println("\n"+prueba.get(prueba.tail));
 
     }
     public static String printList(List lista){
