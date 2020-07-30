@@ -30,4 +30,12 @@ public class ListNode {
                 ", next=" + next +
                 '}';
     }
+
+    public boolean isEquals(ListNode nodo){ //si un nodo es igual a otro
+        if(this.toString().equals(nodo.toString())){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

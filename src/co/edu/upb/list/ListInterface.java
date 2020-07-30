@@ -40,8 +40,6 @@ public interface ListInterface {
      */
     public boolean contains(Object object);
 
-    public boolean isEquals(Object object);
-
     public Iterator<ListNode> iterator();
 
     public Object[] toArray();

@@ -270,11 +270,6 @@ public class List implements ListInterface, Iterable<ListNode> {
         }
     }
 
-    @Override
-    public boolean isEquals(Object object) {
-        //to do
-        return false;
-    }
 
     @Override
     public Iterator<ListNode> iterator() {
