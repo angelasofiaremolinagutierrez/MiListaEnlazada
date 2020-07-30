@@ -2,11 +2,13 @@ package co.edu.upb.list;
 
 import java.util.Iterator;
 
-public class List implements ListInterface {
+public class List implements ListInterface, Iterable<ListNode> {
 
     public ListNode head;
     public ListNode tail;
-    public int size = 0;
+
+    private ListNode inode;
+    private int size = 0;
 
     public List() {
         this.head = null;
@@ -29,14 +31,14 @@ public class List implements ListInterface {
 
     @Override
     public int getSize() {
-        return size;
+        return this.size;
     }
 
     @Override
     public void clear() {
         head.next = null;
         head = null;
-        size = 0;
+        this.size = 0;
     }
 
     @Override
@@ -103,7 +105,7 @@ public class List implements ListInterface {
     @Override
     public boolean insert(ListNode node, Object object) {
         //to do
-        size += 1;
+        this.size += 1;
         return false;
     }
 
@@ -127,7 +129,7 @@ public class List implements ListInterface {
                     nuevoNodo.next = anterior.next;
                     anterior.next = nuevoNodo;
 
-                    size += 1;
+                    this.size += 1;
                     return true;
                 }
             }
@@ -152,7 +154,7 @@ public class List implements ListInterface {
                 newHead.next = this.head;
                 head = newHead;
             }
-            size += 1;
+            this.size += 1;
             return true;
         }catch (Exception e){
             System.out.println("Hubo un error al insertar por la cabeza el elemento");
@@ -170,7 +172,7 @@ public class List implements ListInterface {
                 tail.next = new ListNode(object);
                 tail = tail.next;
             }
-            size += 1;
+            this.size += 1;
             return true;
         }catch (NullPointerException e){
             System.out.println("Algo está nulo al agregar: " + e);
@@ -213,7 +215,7 @@ public class List implements ListInterface {
                     anterior.next = actual.next;
                     actual = null;
                 }
-                size -= 1;
+                this.size -= 1;
                 return true;
             }
         }catch (NullPointerException e){
@@ -242,8 +244,25 @@ public class List implements ListInterface {
 
     @Override
     public Iterator<ListNode> iterator() {
-        //to do
-        return null;
+        inode = head;
+        Iterator<ListNode> i = new Iterator<ListNode>() {
+            @Override
+            public boolean hasNext() {
+                return inode.next != null ? true : false;
+            }
+
+            @Override
+            public ListNode next() {
+                if (hasNext()) {
+                    ListNode tmp = inode;
+                    inode = inode.next;
+                    return tmp;
+                } else {
+                    return null;
+                }
+            }
+        };
+        return i;
     }
 
     @Override
