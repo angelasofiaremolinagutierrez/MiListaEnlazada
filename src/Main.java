@@ -15,7 +15,8 @@ public class Main {
         System.out.println(printList(prueba));
         System.out.println('\n');
         //System.out.println(prueba.insert(4,3));
-        System.out.println(prueba.remove(prueba.head));
+        //System.out.println(prueba.insert(prueba.search(3),4));
+        //System.out.println(prueba.remove(prueba.head));
         //prueba.clear();
         //System.out.println(prueba.isEmpty());
         System.out.println('\n');

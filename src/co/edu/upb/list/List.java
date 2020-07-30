@@ -103,14 +103,32 @@ public class List implements ListInterface, Iterable<ListNode> {
     }
 
     @Override
-    public boolean insert(ListNode node, Object object) {
-        //to do
-        this.size += 1;
-        return false;
+    public boolean insert(ListNode nodoAtras, Object object) {
+        try {
+            if(isEmpty()){
+                System.out.println("No hay objetos en la lista");
+                return false;
+            }else{
+
+                ListNode nuevoNodo = new ListNode(object);
+                nuevoNodo.next = nodoAtras.next;
+                nodoAtras.next = nuevoNodo;
+
+                this.size += 1;
+                return true;
+
+            }
+        }catch (NullPointerException e){
+            System.out.println("Algo está nulo al remover: " + e);
+            return false;
+        }catch (Exception e){
+            System.out.println("Hubo un error al eliminar el elemento");
+            return false;
+        }
     }
 
     @Override
-    public boolean insert(Object object, Object nodoAtras) {
+    public boolean insert(Object object, Object objetoAtras) {
         //este metodo es para insertar un objeto en frente de otro
         //object es el objeto a agregar
         //nodoAtras es el nodo de referencia para insertar al frente del él.
@@ -119,7 +137,7 @@ public class List implements ListInterface, Iterable<ListNode> {
                 System.out.println("No hay objetos en la lista");
                 return false;
             }else{
-                ListNode anterior = search(nodoAtras);
+                ListNode anterior = search(objetoAtras);
                 if (anterior==null){
                     System.out.println("El objeto de referencia no se encuentra en la lista");
                     return false;
@@ -226,6 +244,8 @@ public class List implements ListInterface, Iterable<ListNode> {
             return false;
         }
     }
+
+    //extensión
 
     @Override
     public boolean contains(Object object) {
