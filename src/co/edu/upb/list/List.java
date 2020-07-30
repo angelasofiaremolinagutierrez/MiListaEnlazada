@@ -294,10 +294,17 @@ public class List implements ListInterface, Iterable<ListNode> {
         return i;
     }
 
+    //Nota: el is equals lo encontrará en ListNode.java
+
     @Override
     public Object[] toArray() {
-        //to do
-        return new Object[0];
+        Object[] array =  new Object[this.getSize()];
+        ListNode nodo = this.head;
+        for (int i = 0; i <this.getSize() ; i++) {
+            array[i] = nodo;
+            nodo = nodo.next;
+        }
+        return array;
     }
 
     @Override

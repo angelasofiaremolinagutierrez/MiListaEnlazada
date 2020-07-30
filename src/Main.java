@@ -17,6 +17,13 @@ public class Main {
         //System.out.println(prueba.insert(4,3));
         //System.out.println(prueba.insert(prueba.search(3),4));
         //System.out.println(prueba.remove(prueba.head));
+        //System.out.println(prueba.set(prueba.head,11));
+        //System.out.println(prueba.contains(80));
+        /*
+        for (Object n:prueba.toArray()) {
+            System.out.println(n);
+        }
+        */
         //prueba.clear();
         //System.out.println(prueba.isEmpty());
         System.out.println('\n');
