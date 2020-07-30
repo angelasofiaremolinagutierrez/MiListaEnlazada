@@ -308,9 +308,13 @@ public class List implements ListInterface, Iterable<ListNode> {
     }
 
     @Override
-    public Object[] toArray(Object[] object) {
-        //to do
-        return new Object[0];
+    public Object[] toArray(Object[] array) {
+        ListNode nodo = this.head;
+        for (int i = 0; i <this.getSize() ; i++) {
+            array[i] = nodo;
+            nodo = nodo.next;
+        }
+        return array;
     }
 
     @Override
