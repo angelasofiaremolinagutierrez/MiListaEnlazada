@@ -203,8 +203,22 @@ public class List implements ListInterface, Iterable<ListNode> {
 
     @Override
     public boolean set(ListNode node, Object object) {
-        //to do
-        return false;
+        try {
+            ListNode actual = this.head;
+            while (actual.next  != null){
+                if((actual.toString().equals(node.toString()))){
+                    actual.setObject(object);
+                    break;
+                }
+                else{
+                    actual = actual.next;
+                }
+            }
+            return true;
+        }catch (Exception e){
+            System.out.println("Hubo un error al cambiar el elemento");
+            return false;
+        }
     }
 
     @Override
