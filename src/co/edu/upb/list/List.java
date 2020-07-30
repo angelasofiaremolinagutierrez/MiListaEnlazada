@@ -78,11 +78,11 @@ public class List implements ListInterface {
         ListNode nodoVar = this.head;
         while (true){
             if(nodoVar.next != null){
-                if(nodoVar.getObject() != object){
-                    nodoVar = nodoVar.next;
+                if(nodoVar.getObject().equals(object)){
+                    return nodoVar;
                 }
                 else{
-                    return nodoVar;
+                    nodoVar = nodoVar.next;
                 }
             }else{//si va en el ultimo
                 if(nodoVar.getObject().equals(object)){
@@ -227,8 +227,11 @@ public class List implements ListInterface {
 
     @Override
     public boolean contains(Object object) {
-        //to do
-        return false;
+        if(search(object)!=null){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
