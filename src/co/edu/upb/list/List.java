@@ -6,7 +6,7 @@ public class List implements ListInterface {
 
     public ListNode head;
     public ListNode tail;
-    public int cont = 0;
+    public int size = 0;
 
     public List() {
         this.head = null;
@@ -29,15 +29,14 @@ public class List implements ListInterface {
 
     @Override
     public int getSize() {
-        //to do
-
-        return cont;
+        return size;
     }
 
     @Override
     public void clear() {
-        //to do
-        cont = 0;
+        head.next = null;
+        head = null;
+        size = 0;
     }
 
     @Override
@@ -104,7 +103,7 @@ public class List implements ListInterface {
     @Override
     public boolean insert(ListNode node, Object object) {
         //to do
-        cont += 1;
+        size += 1;
         return false;
     }
 
@@ -128,7 +127,7 @@ public class List implements ListInterface {
                     nuevoNodo.next = anterior.next;
                     anterior.next = nuevoNodo;
 
-                    cont += 1;
+                    size += 1;
                     return true;
                 }
             }
@@ -153,7 +152,7 @@ public class List implements ListInterface {
                 newHead.next = this.head;
                 head = newHead;
             }
-            cont += 1;
+            size += 1;
             return true;
         }catch (Exception e){
             System.out.println("Hubo un error al insertar por la cabeza el elemento");
@@ -171,7 +170,7 @@ public class List implements ListInterface {
                 tail.next = new ListNode(object);
                 tail = tail.next;
             }
-            cont += 1;
+            size += 1;
             return true;
         }catch (NullPointerException e){
             System.out.println("Algo está nulo al agregar: " + e);
@@ -207,11 +206,14 @@ public class List implements ListInterface {
                     }
                 }
 
-                anterior.next = actual.next;
-
-                actual = null;
-
-                cont -= 1;
+                if(anterior==null){
+                    head = actual.next;
+                    actual = null;
+                }else{
+                    anterior.next = actual.next;
+                    actual = null;
+                }
+                size -= 1;
                 return true;
             }
         }catch (NullPointerException e){

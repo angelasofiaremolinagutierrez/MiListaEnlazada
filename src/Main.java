@@ -14,28 +14,35 @@ public class Main {
 
         System.out.println(printList(prueba));
         System.out.println('\n');
-        System.out.println(prueba.insert(4,3));
-        //System.out.println(prueba.remove(2));
+        //System.out.println(prueba.insert(4,3));
+        System.out.println(prueba.remove(prueba.head));
+        //prueba.clear();
+        //System.out.println(prueba.isEmpty());
         System.out.println('\n');
         System.out.println(printList(prueba));
 
 
-        System.out.println("\n"+prueba.get(prueba.tail));
+        //System.out.println("\n"+prueba.get(prueba.tail));
 
     }
     public static String printList(List lista){
         String str ="";
-        ListNode nodoVar = lista.head;
-        while (true){
-            if(nodoVar.next != null){
-                str += nodoVar.toString()+'\n';
-                nodoVar = nodoVar.next;
+        if(lista.isEmpty()){
+            return "La lista está vacía";
+        }else{
+            ListNode nodoVar = lista.head;
+            while (true){
+                if(nodoVar.next != null){
+                    str += nodoVar.toString()+'\n';
+                    nodoVar = nodoVar.next;
+                }
+                else{
+                    str+=nodoVar.toString();
+                    break;
+                }
             }
-            else{
-                str+=nodoVar.toString();
-                break;
-            }
+            return str;
         }
-        return str;
+
     }
 }
