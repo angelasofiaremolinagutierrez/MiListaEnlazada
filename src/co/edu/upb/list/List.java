@@ -1,6 +1,6 @@
 package co.edu.upb.list;
 
-import java.util.Iterator;
+import java.util.*;
 
 public class List implements ListInterface, Iterable<ListNode> {
 
@@ -409,11 +409,32 @@ public class List implements ListInterface, Iterable<ListNode> {
     @Override
     public List sortList() {
 
-        List lista = new List();
+        Object[] listaAOrdenar = this.toArray();
 
-        //to do
+        //todo fix!!
+        /*
+        Arrays.sort(listaAOrdenar,new Comparator<ListNode>() {
+            @Override
+            public int compare(ListNode t1, ListNode t2) {
+                return ((t1.getObject().toString()).compareTo(t2.getObject().toString()));
+                }
+            }
+        });
+*/
 
-        return lista;
+        List listaOrdenada = new List();
+
+        ListNode n = head;
+        while (true){
+            if (!n.next.equals(null)){
+                listaOrdenada.add(n.getObject());
+                n = n.next;
+            }else{
+                listaOrdenada.add(n.getObject());
+                break;
+            }
+        }
+        return listaOrdenada;
     }
 
 

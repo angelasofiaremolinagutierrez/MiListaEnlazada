@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         List prueba = new List();
-        prueba.add(1);
+        prueba.add(9);
         prueba.add(2);
         prueba.add(3);
         prueba.add(5);
@@ -22,8 +22,8 @@ public class Main {
         /*
         for (Object n:prueba.toArray()) {
             System.out.println(n);
-        }
-        */
+        }*/
+        prueba.sortList();
         /*
         List x = prueba.subList(prueba.head,prueba.head.next);
         System.out.println(printList(x));
