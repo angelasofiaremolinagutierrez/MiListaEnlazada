@@ -325,7 +325,18 @@ public class List implements ListInterface, Iterable<ListNode> {
 
     @Override
     public Object getBeforeTo(ListNode node) {
-        //to do
+        ListNode actual = this.head;
+        ListNode anterior = null;
+
+        while (actual.next  != null){
+            if(!(actual.toString().equals(node.toString()))){
+                anterior = actual;
+                actual = actual.next;
+            }
+            else{
+                return anterior.getObject();
+            }
+        }
 
         return null;
     }
