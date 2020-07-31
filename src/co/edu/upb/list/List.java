@@ -437,5 +437,16 @@ public class List implements ListInterface, Iterable<ListNode> {
         return listaOrdenada;
     }
 
+    //1. metodo para recorrer de forma recursiva
+
+    public void recorrer(ListNode node){
+        if (node.next == null){
+            System.out.println(node.toString());
+        }else {
+            System.out.println(node.toString());
+            recorrer(node.next);
+        }
+    }
+
 
 }
