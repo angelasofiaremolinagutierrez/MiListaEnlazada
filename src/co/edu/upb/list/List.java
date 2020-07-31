@@ -319,8 +319,8 @@ public class List implements ListInterface, Iterable<ListNode> {
 
     @Override
     public Object getBeforeTo() {
-        //to do
-        return null;
+        //suponiendo que el metodo es obtener el anterior a todo
+        return this.getHead();
     }
 
     @Override
@@ -355,8 +355,8 @@ public class List implements ListInterface, Iterable<ListNode> {
 
     @Override
     public Object getNextTo() {
-        //to do
-        return null;
+        //suponiendo que el metodo es obtener el siguiente a todo
+        return this.getTail();
     }
 
     @Override
@@ -408,8 +408,12 @@ public class List implements ListInterface, Iterable<ListNode> {
 
     @Override
     public List sortList() {
+
+        List lista = new List();
+
         //to do
-        return null;
+
+        return lista;
     }
 
 
