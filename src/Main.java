@@ -23,7 +23,7 @@ public class Main {
         for (Object n:prueba.toArray()) {
             System.out.println(n);
         }*/
-        prueba.sortList();
+        //prueba.sortList();
         /*
         List x = prueba.subList(prueba.head,prueba.head.next);
         System.out.println(printList(x));
