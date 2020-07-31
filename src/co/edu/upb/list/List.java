@@ -326,6 +326,7 @@ public class List implements ListInterface, Iterable<ListNode> {
     @Override
     public Object getBeforeTo(ListNode node) {
         //to do
+        
         return null;
     }
 
@@ -343,8 +344,34 @@ public class List implements ListInterface, Iterable<ListNode> {
 
     @Override
     public List subList(ListNode from, ListNode to) {
-        //to do
+        List lista = new List();
+        ListNode n = head;
+        while (n.next != null){
+            if(n.equals(from)){
+                lista.add(n.getObject());
+                while (true){
+                    n=n.next;
+                    if (!n.equals(null)){
+                        if(n.equals(to)){
+                            lista.add(n.getObject());
+                            return lista;
+                        }else{
+                            lista.add(n.getObject());
+                        }
+                    }else{
+                        System.out.println("El nodo final que ingresó no existe en la lista");
+                        return null;
+                    }
+                }
+
+            }else{
+                n = n.next;
+            }
+        }
+        System.out.println("El nodo inicial que ingresó no existe en la lista");
         return null;
+
+
     }
 
     @Override

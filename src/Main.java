@@ -24,6 +24,8 @@ public class Main {
             System.out.println(n);
         }
         */
+        List x = prueba.subList(prueba.head,prueba.head.next);
+        System.out.println(printList(x));
         //prueba.clear();
         //System.out.println(prueba.isEmpty());
         System.out.println('\n');
