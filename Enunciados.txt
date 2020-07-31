@@ -1,0 +1,9 @@
+1. (0.5) Escriba un método que recorra una lista de forma recursiva.
+2. (1.5) Escriba un programa que mezcle un número n de veces las cartas de una baraja de
+ póker (https://es.wikipedia.org/wiki/Baraja_inglesa) que en un inicio estarán ordenadas. Y también pueda reiniciar ordenando por un palo.
+3. (1.5) Escriba un programa para una calculadora básica (+, -,*,/)
+(https://www.smartick.es/blog/matematicas/divisiones/como-resolver-divisiones-de-2-cifras/) de números enteros mayores a 30 dígitos.
+4. (1.5) Un vector disperso es aquel que tiene muchos elementos que son cero.
+Escribir un programa que represente un vector disperso con listas enlazadas. Los nodos son los elementos del vector distintos de cero.
+Cada nodo contendrá el valor del elemento y su índice (posición del vector). El programa ha de realizar las operaciones: sumar dos vectores
+(https://www.fisicalab.com/apartado/suma-de-vectores)  de igual dimensión y hallar el producto escalar(https://www.geogebra.org/m/tmvZQMwr).
