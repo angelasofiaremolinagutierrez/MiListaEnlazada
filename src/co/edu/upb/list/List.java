@@ -328,16 +328,28 @@ public class List implements ListInterface, Iterable<ListNode> {
         ListNode actual = this.head;
         ListNode anterior = null;
 
-        while (actual.next  != null){
-            if(!(actual.toString().equals(node.toString()))){
-                anterior = actual;
-                actual = actual.next;
+        while (true){
+            if(actual.next  != null){
+                if(actual.toString().equals(node.toString())){
+                    if(anterior==null){
+                        return null;
+                    }else{
+                        return anterior.getObject();
+                    }
+                }
+                else{
+                    anterior = actual;
+                    actual = actual.next;
+                }
+            }else{
+                if(actual.toString().equals(node.toString())){
+                    return anterior.getObject();
+                }else{
+                    break;
+                }
             }
-            else{
-                return anterior.getObject();
-            }
-        }
 
+        }
         return null;
     }
 
