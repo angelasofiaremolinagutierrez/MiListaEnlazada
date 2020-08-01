@@ -35,44 +35,60 @@ public class Calculadora {
         String op = scan.nextLine();
         switch (op){
             case "+":
+                ListNode nodeRec;
+                ListNode nodeRec1 = n1.head;
+                ListNode nodeRec2 = n2.head;
+
                 if(n1.getSize()>=n2.getSize()){
-                    ListNode nodeRec1 = n1.head;
-                    ListNode nodeRec2 = n2.head;
-
-                    int lleva = 0;
-                    int digito1;
-                    int digito2;
-                    while(nodeRec1 != null){
-                        digito1 = (int)n1.get(nodeRec1);
-
-                        if(nodeRec2 == null){
-                            digito2 = 0;
-                        }else{
-                            digito2 = (int)n2.get(nodeRec2);
-                        }
-
-                        int sumActual =  digito1 + digito2 + lleva;
-                        lleva = 0;
-                        if(sumActual >=10){
-                            sumActual = sumActual - 10;
-                            lleva++;
-                        }
-                        res.add(sumActual);
-                        nodeRec1 = nodeRec1.next;
-
-                        if(nodeRec2==null){
-                            digito2 = 0;
-                        }else{
-                            nodeRec2 = nodeRec2.next;
-                        }
-                    }
-                    if (lleva != 0){
-                        res.add(lleva);
-                    }
-                    res.printList();
+                    nodeRec = nodeRec1;
                 }else{
-
+                    nodeRec = nodeRec2;
                 }
+
+                int lleva = 0;
+                int digito1;
+                int digito2;
+                while(nodeRec != null){
+
+                    if(nodeRec1 == null ){
+                        digito1 = 0;
+                    }else{
+                        digito1 =(int)n1.get(nodeRec1);
+                    }
+
+                    if(nodeRec2 == null){
+                        digito2 = 0;
+                    }
+                    else{
+                        digito2 = (int)n2.get(nodeRec2);
+                    }
+
+                    int sumActual =  digito1 + digito2 + lleva;
+                    lleva = 0;
+                    if(sumActual >=10){
+                        sumActual = sumActual - 10;
+                        lleva++;
+                    }
+                    res.add(sumActual);
+
+                    if(nodeRec1==null){
+                        digito1 = 0;
+                    }else{
+                        nodeRec1 = nodeRec1.next;
+                    }
+
+                    if(nodeRec2==null){
+                        digito2 = 0;
+                    }else{
+                        nodeRec2 = nodeRec2.next;
+                    }
+                    nodeRec = nodeRec.next;
+                }
+                if (lleva != 0){
+                    //todo comprobar si lleva es de más de dos digitos
+                    res.add(lleva);
+                }
+                res.printList();
                 break;
             case "-":
                 break;
