@@ -448,5 +448,29 @@ public class List implements ListInterface, Iterable<ListNode> {
         }
     }
 
+    public void printList(){
+        String str ="";
+        if(isEmpty()){
+            System.out.println("La lista está vacía");
+        }else{
+            ListNode nodoVar = head;
+            while (true){
+                if(nodoVar.next != null){
+                    str += nodoVar.toString()+'\n';
+                    nodoVar = nodoVar.next;
+                }
+                else{
+                    str+=nodoVar.toString();
+                    break;
+                }
+            }
+
+            System.out.println(str);
+        }
+
+    }
+
+
+
 
 }
