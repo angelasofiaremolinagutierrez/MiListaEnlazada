@@ -85,10 +85,8 @@ public class Calculadora {
                     nodeRec = nodeRec.next;
                 }
                 if (lleva != 0){
-                    //todo comprobar si lleva es de más de dos digitos
                     res.add(lleva);
                 }
-                res.printList();
                 break;
             case "-":
                 break;
