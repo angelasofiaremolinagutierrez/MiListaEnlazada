@@ -76,24 +76,24 @@ public class Calculadora {
                     n2.add(Character.getNumericValue(n2_str.charAt(i))); //agregar numero a la lista de atras hacia adelante
                 }
 
-                ListNode nodeRec1 = n1.head; //abajo
+                ListNode nodeRec2 = n2.head; //abajo
 
 
                 List sumaListas = new List();
                 int digito1;
                 int digito2;
                 int cont = 0;
-                while(nodeRec1 != null){
-                    digito1 = (int) n1.get(nodeRec1);
+                while(nodeRec2 != null){
+                    digito2 = (int) n2.get(nodeRec2);
 
                     int lleva = 0;
                     List temp = new List();
                     for (int i = 0; i <cont ; i++) {
                         temp.add(0);
                     }
-                    ListNode nodeRec2 = n2.head; //arriba
-                    while (nodeRec2 != null){
-                        digito2 = (int) n2.get(nodeRec2);
+                    ListNode nodeRec1 = n1.head; //arriba
+                    while (nodeRec1 != null){
+                        digito1 = (int) n1.get(nodeRec1);
 
                         int resTemp = (digito1*digito2)+lleva;
                         lleva = 0;
@@ -104,11 +104,14 @@ public class Calculadora {
                         }
                         temp.add(resTemp);
 
-                        nodeRec2 = nodeRec2.next;
+                        nodeRec1 = nodeRec1.next;
+                    }
+                    if(lleva != 0){
+                        temp.add(lleva);
                     }
                     cont++;
                     sumaListas = suma(sumaListas,temp);
-                    nodeRec1 = nodeRec1.next;
+                    nodeRec2 = nodeRec2.next;
                 }
 
                 String invStr = sumaListas.listAsString();
