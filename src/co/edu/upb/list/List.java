@@ -469,8 +469,4 @@ public class List implements ListInterface, Iterable<ListNode> {
         }
 
     }
-
-
-
-
 }
