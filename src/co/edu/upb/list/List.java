@@ -469,4 +469,21 @@ public class List implements ListInterface, Iterable<ListNode> {
         }
 
     }
+
+    public String listAsString(){
+        String str ="";
+
+        ListNode nodoVar = head;
+        while (true){
+            if(nodoVar != null){
+                str += nodoVar.getObject().toString();
+                nodoVar = nodoVar.next;
+            }
+            else{
+                break;
+            }
+        }
+
+        return (str);
+    }
 }
