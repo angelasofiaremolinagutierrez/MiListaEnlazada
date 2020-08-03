@@ -47,7 +47,7 @@ public class Calculadora {
             }
                 break;
 
-            case "-": {
+            case "-": { // todo restas negativas
                 //se agregan así con el fin de tener primero unidades, luego decenas, centenas, etc.
                 //ESTO SOLO SIRVE PARA SUMA RESTA MULTIPLICACION
 
@@ -93,7 +93,7 @@ public class Calculadora {
 
             }
                 break;
-            case "/": {
+            case "/": { //todo
                 //En este caso si se agregan en orden
                 for (int i = 0; i < n1_str.length() - 1; i++) {
                     n1.add(Character.getNumericValue(n1_str.charAt(i))); //agregar numero a la lista de atras hacia adelante
@@ -101,6 +101,8 @@ public class Calculadora {
                 for (int i = 0; i < n2_str.length() - 1; i++) {
                     n2.add(Character.getNumericValue(n2_str.charAt(i))); //agregar numero a la lista de atras hacia adelante
                 }
+
+
             }
                 break;
         }
