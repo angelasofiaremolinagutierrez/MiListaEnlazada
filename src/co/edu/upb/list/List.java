@@ -459,11 +459,11 @@ public class List implements ListInterface, Iterable<ListNode> {
             ListNode nodoVar = head;
             while (true){
                 if(nodoVar.next != null){
-                    str += nodoVar.toString()+'\n';
+                    str += nodoVar.getObject()+" ";
                     nodoVar = nodoVar.next;
                 }
                 else{
-                    str+=nodoVar.toString();
+                    str+=nodoVar.getObject();
                     break;
                 }
             }
