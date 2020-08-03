@@ -1,5 +1,6 @@
 package co.edu.upb.list;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class List implements ListInterface, Iterable<ListNode> {
@@ -304,7 +305,7 @@ public class List implements ListInterface, Iterable<ListNode> {
         Object[] array =  new Object[this.getSize()];
         ListNode nodo = this.head;
         for (int i = 0; i <this.getSize() ; i++) {
-            array[i] = nodo;
+            array[i] = nodo.getObject();
             nodo = nodo.next;
         }
         return array;
@@ -314,7 +315,7 @@ public class List implements ListInterface, Iterable<ListNode> {
     public Object[] toArray(Object[] array) {
         ListNode nodo = this.head;
         for (int i = 0; i <this.getSize() ; i++) {
-            array[i] = nodo;
+            array[i] = nodo.getObject();
             nodo = nodo.next;
         }
         return array;
@@ -413,31 +414,32 @@ public class List implements ListInterface, Iterable<ListNode> {
     public List sortList() {
 
         Object[] listaAOrdenar = this.toArray();
+        Arrays.sort(listaAOrdenar);
 
-        //todo fix!!
-        /*
-        Arrays.sort(listaAOrdenar,new Comparator<ListNode>() {
-            @Override
-            public int compare(ListNode t1, ListNode t2) {
-                return ((t1.getObject().toString()).compareTo(t2.getObject().toString()));
-                }
-            }
-        });
-*/
 
         List listaOrdenada = new List();
-
-        ListNode n = head;
-        while (true){
-            if (!n.next.equals(null)){
-                listaOrdenada.add(n.getObject());
-                n = n.next;
-            }else{
-                listaOrdenada.add(n.getObject());
-                break;
-            }
+        for (Object n:listaAOrdenar) {
+            listaOrdenada.add(n);
         }
+
         return listaOrdenada;
+
+        //this = listaOrdenada;
+        //return this;
+    }
+
+    public List shuffle() {
+        Object[] listaArray = this.toArray();
+        Collections.shuffle(Arrays.asList(listaArray));
+
+        List shuffled = new List();
+        for (Object ob:listaArray) {
+            shuffled.add(ob);
+        }
+        return shuffled;
+
+        //this = shuffled;
+        //return this;
     }
 
     //1. metodo para recorrer de forma recursiva

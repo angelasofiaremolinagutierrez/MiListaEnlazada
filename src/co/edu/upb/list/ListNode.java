@@ -1,6 +1,6 @@
 package co.edu.upb.list;
 
-public class ListNode {
+public class ListNode implements Comparable<ListNode> {
 
     private Object object;
     public ListNode next;
@@ -37,5 +37,10 @@ public class ListNode {
         }else{
             return false;
         }
+    }
+
+    @Override
+    public int compareTo(ListNode n1) {
+        return (this.getObject().toString()).compareTo(n1.getObject().toString());
     }
 }
