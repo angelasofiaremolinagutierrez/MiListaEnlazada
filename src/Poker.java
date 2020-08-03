@@ -75,7 +75,7 @@ public class Poker {
                     }
 
                     System.out.println("Aqui esta el palo ordenado");
-                    suit.sortList().printList(); //este sort ordena por strings
+                    suit.sortList().printList(); //todo to fix: este sort ordena por strings no el orden de la baraja
                 }
                 break;
                 case 3:{
