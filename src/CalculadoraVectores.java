@@ -53,5 +53,6 @@ public class CalculadoraVectores {
 
         System.out.println("Vector resultante =");
         res.printList();
+        //finalizado
     }
 }
