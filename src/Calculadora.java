@@ -10,7 +10,6 @@ public class Calculadora {
 
         List n1 = new List();
         List n2 = new List();
-        List res;
 
         System.out.println("Ingrese el primer numero mayor a treinta digitos");
         String n1_str = scan.nextLine();
@@ -59,13 +58,19 @@ public class Calculadora {
                     n2.add(Character.getNumericValue(n2_str.charAt(i))); //agregar numero a la lista de atras hacia adelante
                 }
 
+                List inv = resta(n1,n2);
+                String invStr = inv.listAsString();
 
+                StringBuilder input = new StringBuilder();
+                input.append(invStr);
+                input = input.reverse();
 
+                System.out.println(input);
 
             }
                 break;
 
-            case "*":{ //todo to fix!!
+            case "*":{
                 //se agregan así con el fin de tener primero unidades, luego decenas, centenas, etc.
                 //ESTO SOLO SIRVE PARA SUMA RESTA MULTIPLICACION
 
@@ -76,45 +81,9 @@ public class Calculadora {
                     n2.add(Character.getNumericValue(n2_str.charAt(i))); //agregar numero a la lista de atras hacia adelante
                 }
 
-                ListNode nodeRec2 = n2.head; //abajo
+                List res = multiplicacion(n1,n2);
 
-
-                List sumaListas = new List();
-                int digito1;
-                int digito2;
-                int cont = 0;
-                while(nodeRec2 != null){
-                    digito2 = (int) n2.get(nodeRec2);
-
-                    int lleva = 0;
-                    List temp = new List();
-                    for (int i = 0; i <cont ; i++) {
-                        temp.add(0);
-                    }
-                    ListNode nodeRec1 = n1.head; //arriba
-                    while (nodeRec1 != null){
-                        digito1 = (int) n1.get(nodeRec1);
-
-                        int resTemp = (digito1*digito2)+lleva;
-                        lleva = 0;
-                        if (resTemp >= 10) {
-                            String resStr = String.valueOf(resTemp);
-                            lleva = Character.getNumericValue(resStr.charAt(0));
-                            resTemp = Character.getNumericValue(resStr.charAt(1));
-                        }
-                        temp.add(resTemp);
-
-                        nodeRec1 = nodeRec1.next;
-                    }
-                    if(lleva != 0){
-                        temp.add(lleva);
-                    }
-                    cont++;
-                    sumaListas = suma(sumaListas,temp);
-                    nodeRec2 = nodeRec2.next;
-                }
-
-                String invStr = sumaListas.listAsString();
+                String invStr = res.listAsString();
 
                 StringBuilder input = new StringBuilder();
                 input.append(invStr);
@@ -195,5 +164,97 @@ public class Calculadora {
         }
 
         return res;
+    }
+
+    public static List resta(List n1,List n2){
+        List res = new List();
+
+        ListNode nodeRec1 = n1.head;
+        ListNode nodeRec2 = n2.head;
+
+        int presta = 0;
+        int digito1;
+        int digito2;
+
+        while (nodeRec1 != null) {
+
+            digito1 =((int) n1.get(nodeRec1)) - presta;
+            presta = 0;
+
+            if (nodeRec2 == null) {
+                digito2 = 0;
+            } else {
+                digito2 = (int) n2.get(nodeRec2);
+            }
+
+            int resActual;
+            if (digito1<digito2){
+                resActual = (digito1 + 10) - digito2 ;
+                presta = 1;
+            }else{
+                resActual = digito1 - digito2 ;
+            }
+            res.add(resActual);
+
+            nodeRec1 = nodeRec1.next;
+
+            if (nodeRec2 == null) {
+                digito2 = 0;
+            } else {
+                nodeRec2 = nodeRec2.next;
+            }
+        }
+        while((int)res.tail.getObject() == 0){
+            if(res.getSize() == 1){
+                break;
+            }
+            res.remove(res.tail);
+        }
+        return res;
+    }
+
+    public static List multiplicacion(List n1,List n2){
+        ListNode nodeRec2 = n2.head; //abajo
+
+        List sumaListas = new List();
+        int digito1;
+        int digito2;
+        int cont = 0;
+        while(nodeRec2 != null){
+            digito2 = (int) n2.get(nodeRec2);
+
+            int lleva = 0;
+            List temp = new List();
+            for (int i = 0; i <cont ; i++) {
+                temp.add(0);
+            }
+            ListNode nodeRec1 = n1.head; //arriba
+            while (nodeRec1 != null){
+                digito1 = (int) n1.get(nodeRec1);
+
+                int resTemp = (digito1*digito2)+lleva;
+                lleva = 0;
+                if (resTemp >= 10) {
+                    String resStr = String.valueOf(resTemp);
+                    lleva = Character.getNumericValue(resStr.charAt(0));
+                    resTemp = Character.getNumericValue(resStr.charAt(1));
+                }
+                temp.add(resTemp);
+
+                nodeRec1 = nodeRec1.next;
+            }
+            if(lleva != 0){
+                temp.add(lleva);
+            }
+            cont++;
+            sumaListas = suma(sumaListas,temp);
+            nodeRec2 = nodeRec2.next;
+        }
+
+        return sumaListas;
+    }
+
+    public static List division(List n1,List n2){
+        return null;
     }
 }

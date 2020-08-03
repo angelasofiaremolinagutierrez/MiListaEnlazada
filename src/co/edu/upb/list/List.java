@@ -244,6 +244,9 @@ public class List implements ListInterface, Iterable<ListNode> {
                     head = actual.next;
                     actual = null;
                 }else{
+                    if(actual.next==null){
+                        tail= anterior;
+                    }
                     anterior.next = actual.next;
                     actual = null;
                 }
