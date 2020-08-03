@@ -11,5 +11,8 @@ public class Main {
         prueba.add(2);
         prueba.add(3);
         prueba.add(5);
+
+        //Probando el recorrido recursivo
+        prueba.recorrer(prueba.head);
     }
 }
