@@ -422,10 +422,9 @@ public class List implements ListInterface, Iterable<ListNode> {
             listaOrdenada.add(n);
         }
 
-        return listaOrdenada;
-
-        //this = listaOrdenada;
-        //return this;
+        this.head = listaOrdenada.head;
+        this.tail = listaOrdenada.tail;
+        return this;
     }
 
     public List shuffle() {
@@ -436,10 +435,10 @@ public class List implements ListInterface, Iterable<ListNode> {
         for (Object ob:listaArray) {
             shuffled.add(ob);
         }
-        return shuffled;
 
-        //this = shuffled;
-        //return this;
+        this.head = shuffled.head;
+        this.tail = shuffled.tail;
+        return this;
     }
 
     //1. metodo para recorrer de forma recursiva
