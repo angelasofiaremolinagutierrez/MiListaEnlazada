@@ -323,7 +323,7 @@ public class List implements ListInterface, Iterable<ListNode> {
 
     @Override
     public Object getBeforeTo() {
-        //suponiendo que el metodo es obtener el anterior a todo
+        //suponiendo que el metodo es obtener el anterior a toda la lista
         return this.getHead();
     }
 
@@ -359,7 +359,7 @@ public class List implements ListInterface, Iterable<ListNode> {
 
     @Override
     public Object getNextTo() {
-        //suponiendo que el metodo es obtener el siguiente a todo
+        //suponiendo que el metodo es obtener el siguiente a toda la lista
         return this.getTail();
     }
 
