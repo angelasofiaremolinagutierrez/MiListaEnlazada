@@ -1,5 +1,7 @@
 import co.edu.upb.list.List;
 import co.edu.upb.list.ListNode;
+
+import java.lang.invoke.StringConcatFactory;
 import java.util.Scanner;
 
 public class Poker {
@@ -16,18 +18,13 @@ public class Poker {
         ListNode p = palos.head;
         for (int j = 0; j < 4; j++) {
             String palo = (String) palos.get(p);
-            baraja.add("A"+palo);
-            for (int i = 2; i <11; i++) {
+            for (int i = 1; i <14; i++) {
                 baraja.add(String.valueOf(i)+palo);
             }
-            baraja.add("J"+palo);
-            baraja.add("Q"+palo);
-            baraja.add("K"+palo);
-
             p = p.next;
         }
         System.out.println("Aquí está la baraja inicial ordenada:");
-        baraja.printList();
+        System.out.println(printPoker(baraja));
 
         boolean flag = true;
         while (flag){
@@ -42,7 +39,7 @@ public class Poker {
             switch (op){
                 case 1:{
                     System.out.println("Aquí está su baraja revuelta:");
-                    baraja.shuffle().printList();
+                    System.out.println(printPoker(baraja.shuffle()));
                 }
                 break;
                 case 2:{
@@ -75,7 +72,9 @@ public class Poker {
                     }
 
                     System.out.println("Aqui esta el palo ordenado");
-                    suit.sortList().printList(); //todo to fix: este sort ordena por strings no el orden de la baraja
+                    String temp = printPoker(suit.sortList());
+                    String ordenado = (temp.substring(13))+(temp.substring(0,13));
+                    System.out.println(ordenado);
                 }
                 break;
                 case 3:{
@@ -88,7 +87,40 @@ public class Poker {
                 }
             }
         }
+    }
 
+    public static String printPoker(List lista) {
+        String str = "";
+
+        ListNode nodoVar = lista.head;
+        while (nodoVar != null) {
+
+            String carta = nodoVar.getObject().toString();
+            int numeroCarta = Character.getNumericValue(carta.charAt(0));
+            String paloCarta = String.valueOf(carta.charAt(1));
+
+            if(carta.contains("11")){
+                paloCarta = String.valueOf(carta.charAt(2));
+                carta = "J"+paloCarta;
+            }else if(carta.contains("12")){
+                paloCarta = String.valueOf(carta.charAt(2));
+                carta = "Q"+paloCarta;
+            }else if(carta.contains("13")){
+                paloCarta = String.valueOf(carta.charAt(2));
+                carta = "K"+paloCarta;
+            }else if(carta.contains("10")){
+                paloCarta = String.valueOf(carta.charAt(2));
+                carta = "10"+paloCarta;
+            }else if (numeroCarta == 1){
+                carta = "A"+paloCarta;
+            }
+
+            str += carta + " ";
+            nodoVar = nodoVar.next;
+
+        }
+
+        return str;
 
     }
 }
