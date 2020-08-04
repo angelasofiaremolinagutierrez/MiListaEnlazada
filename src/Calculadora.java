@@ -47,7 +47,7 @@ public class Calculadora {
             }
                 break;
 
-            case "-": { // todo restas negativas
+            case "-": {
                 //se agregan así con el fin de tener primero unidades, luego decenas, centenas, etc.
                 //ESTO SOLO SIRVE PARA SUMA RESTA MULTIPLICACION
 
@@ -65,7 +65,11 @@ public class Calculadora {
                 input.append(invStr);
                 input = input.reverse();
 
-                System.out.println(input);
+                if(esMayor(n1,n2) == -1){
+                    System.out.println("-"+input);
+                }else {
+                    System.out.println(input);
+                }
 
             }
                 break;
@@ -171,22 +175,39 @@ public class Calculadora {
     public static List resta(List n1,List n2){
         List res = new List();
 
-        ListNode nodeRec1 = n1.head;
-        ListNode nodeRec2 = n2.head;
+        List may = new List();
+        List men = new List();
 
         int presta = 0;
         int digito1;
         int digito2;
 
-        while (nodeRec1 != null) {
+        if(esMayor(n1,n2) == 1){
+            may.head = n1.head;
+            may.tail = n1.tail;
+            men.head = n2.head;
+            men.tail = n2.tail;
+        }else if(esMayor(n1,n2) == 0) {
+            res.add(0);
+            return res;
+        }else{
+            may.head = n2.head;
+            may.tail = n2.tail;
+            men.head = n1.head;
+            men.tail = n1.tail;
+        }
 
-            digito1 =((int) n1.get(nodeRec1)) - presta;
+        ListNode nMay = may.head;
+        ListNode nMen = men.head;
+        while (nMay != null) {
+
+            digito1 =((int) may.get(nMay)) - presta;
             presta = 0;
 
-            if (nodeRec2 == null) {
+            if (nMen == null) {
                 digito2 = 0;
             } else {
-                digito2 = (int) n2.get(nodeRec2);
+                digito2 = (int) men.get(nMen);
             }
 
             int resActual;
@@ -198,12 +219,12 @@ public class Calculadora {
             }
             res.add(resActual);
 
-            nodeRec1 = nodeRec1.next;
+            nMay = nMay.next;
 
-            if (nodeRec2 == null) {
+            if (nMen == null) {
                 digito2 = 0;
             } else {
-                nodeRec2 = nodeRec2.next;
+                nMen = nMen.next;
             }
         }
         while((int)res.tail.getObject() == 0){
@@ -258,5 +279,31 @@ public class Calculadora {
 
     public static List division(List n1,List n2){
         return null;
+    }
+
+    public static int esMayor(List n1,List n2){ //n1 es mayor que n2? = 1; //n2 es mayor que n1? = -1 // n1 es igual a n2 = 0
+        if(n1.getSize()>n2.getSize()){//n1>n2
+            return 1;
+        }else if(n1.getSize()<n2.getSize()){//n2>n1
+            return -1;
+        }else{ //si son de igual tamaño, toca ver
+            if(n1.toString().equals(n2.toString())){
+                return 0;
+            }else{
+                ListNode h1 = n1.head;
+                ListNode h2 = n2.head;
+                while (h1 != null){
+                    if(((int)h1.getObject())>((int)h2.getObject())){
+                        return 1;
+                    }else if(((int)h1.getObject())<((int)h2.getObject())){
+                        return -1;
+                    }else{
+                        h1 = h1.next;
+                        h2 = h2.next;
+                    }
+                }
+                return 0;
+            }
+        }
     }
 }
