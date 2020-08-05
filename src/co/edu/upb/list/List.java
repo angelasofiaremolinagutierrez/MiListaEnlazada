@@ -206,7 +206,7 @@ public class List implements ListInterface, Iterable<ListNode> {
     public boolean set(ListNode node, Object object) {
         try {
             ListNode actual = this.head;
-            while (actual.next  != null){
+            while (actual  != null){
                 if((actual.toString().equals(node.toString()))){
                     actual.setObject(object);
                     break;
@@ -489,5 +489,14 @@ public class List implements ListInterface, Iterable<ListNode> {
         }
 
         return (str);
+    }
+
+    public List inverse(){
+        List inv =new List();
+        Object[] array = this.toArray();
+        for (int i = array.length-1; i>=0 ; i--) {
+            inv.add(array[i]);
+        }
+        return inv;
     }
 }

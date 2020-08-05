@@ -23,90 +23,43 @@ public class Calculadora {
 
         String op = scan.nextLine();
 
+        //se agregan así con el fin de tener primero unidades, luego decenas, centenas, etc.
+
+        for (int i = n1_str.length()-1; i>=0; i--) {
+            n1.add(Character.getNumericValue(n1_str.charAt(i))); //agregar numero a la lista de atras hacia adelante
+        }
+        for (int i = n2_str.length()-1; i>=0; i--) {
+            n2.add(Character.getNumericValue(n2_str.charAt(i))); //agregar numero a la lista de atras hacia adelante
+        }
+
         switch (op){
             case "+": {
-                //se agregan así con el fin de tener primero unidades, luego decenas, centenas, etc.
-                //ESTO SOLO SIRVE PARA SUMA RESTA MULTIPLICACION
-
-                for (int i = n1_str.length()-1; i>=0; i--) {
-                    n1.add(Character.getNumericValue(n1_str.charAt(i))); //agregar numero a la lista de atras hacia adelante
-                }
-                for (int i = n2_str.length()-1; i>=0; i--) {
-                    n2.add(Character.getNumericValue(n2_str.charAt(i))); //agregar numero a la lista de atras hacia adelante
-                }
-
                 List inv = suma(n1,n2);
-                String invStr = inv.listAsString();
-
-                StringBuilder input = new StringBuilder();
-                input.append(invStr);
-                input = input.reverse();
-
-                System.out.println(input);
-
+                System.out.println(inv.inverse().listAsString());
             }
                 break;
 
             case "-": {
-                //se agregan así con el fin de tener primero unidades, luego decenas, centenas, etc.
-                //ESTO SOLO SIRVE PARA SUMA RESTA MULTIPLICACION
-
-                for (int i = n1_str.length()-1; i>=0; i--) {
-                    n1.add(Character.getNumericValue(n1_str.charAt(i))); //agregar numero a la lista de atras hacia adelante
-                }
-                for (int i = n2_str.length()-1; i>=0; i--) {
-                    n2.add(Character.getNumericValue(n2_str.charAt(i))); //agregar numero a la lista de atras hacia adelante
-                }
-
                 List inv = resta(n1,n2);
-                String invStr = inv.listAsString();
-
-                StringBuilder input = new StringBuilder();
-                input.append(invStr);
-                input = input.reverse();
-
+                System.out.println(inv.inverse().listAsString());
+                /*
                 if(esMayor(n1,n2) == -1){
                     System.out.println("-"+input);
                 }else {
                     System.out.println(input);
                 }
-
+                */
             }
                 break;
 
             case "*":{
-                //se agregan así con el fin de tener primero unidades, luego decenas, centenas, etc.
-                //ESTO SOLO SIRVE PARA SUMA RESTA MULTIPLICACION
-
-                for (int i = n1_str.length()-1; i>=0; i--) {
-                    n1.add(Character.getNumericValue(n1_str.charAt(i))); //agregar numero a la lista de atras hacia adelante
-                }
-                for (int i = n2_str.length()-1; i>=0; i--) {
-                    n2.add(Character.getNumericValue(n2_str.charAt(i))); //agregar numero a la lista de atras hacia adelante
-                }
-
                 List res = multiplicacion(n1,n2);
-
-                String invStr = res.listAsString();
-
-                StringBuilder input = new StringBuilder();
-                input.append(invStr);
-                input = input.reverse();
-
-                System.out.println(input);
-
+                System.out.println(res.inverse().listAsString());
             }
                 break;
             case "/": { //todo
-                //En este caso si se agregan en orden
-                for (int i = 0; i < n1_str.length() - 1; i++) {
-                    n1.add(Character.getNumericValue(n1_str.charAt(i))); //agregar numero a la lista de atras hacia adelante
-                }
-                for (int i = 0; i < n2_str.length() - 1; i++) {
-                    n2.add(Character.getNumericValue(n2_str.charAt(i))); //agregar numero a la lista de atras hacia adelante
-                }
-
-
+                List res = division(n1,n2);
+                System.out.println(res.inverse().listAsString());
             }
                 break;
         }
@@ -233,6 +186,10 @@ public class Calculadora {
             }
             res.remove(res.tail);
         }
+
+        if(esMayor(n1,n2) != 1){
+            res.set(res.tail,(int)(res.tail.getObject())*-1);
+        }
         return res;
     }
 
@@ -278,7 +235,28 @@ public class Calculadora {
     }
 
     public static List division(List n1,List n2){
-        return null;
+        List res = new List(0);
+        if(esMayor(n1,n2)==1){
+            List resta = resta(n1,n2);;
+            while (true){
+                if((((int)resta.get(resta.head))== 0) && (resta.getSize() == 1)){
+                    break;
+                }else{
+                    if(((int)resta.get(resta.head))<0){
+                        break;
+                    }else{
+                        resta = resta(resta,n2);
+                        res = suma(res,new List(1));
+                    }
+                }
+            }
+            return res;
+        }else if(esMayor(n1, n2)==0){ //si son iguales
+            res = new List(1);
+            return res;
+        }else{
+            return res;
+        }
     }
 
     public static int esMayor(List n1,List n2){ //n1 es mayor que n2? = 1; //n2 es mayor que n1? = -1 // n1 es igual a n2 = 0
