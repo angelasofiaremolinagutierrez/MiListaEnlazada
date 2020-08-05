@@ -237,7 +237,7 @@ public class Calculadora {
     public static List division(List n1,List n2){
         List res = new List(0);
         if(esMayor(n1,n2)==1){
-            List resta = resta(n1,n2);;
+            List resta = n1;
             while (true){
                 if((((int)resta.get(resta.head))== 0) && (resta.getSize() == 1)){
                     break;
@@ -245,6 +245,7 @@ public class Calculadora {
                     if(((int)resta.get(resta.head))<0){
                         break;
                     }else{
+                        //Nota: si la división no es entera devuelve el numero un entero que representa el decimal aproximado a techo
                         resta = resta(resta,n2);
                         res = suma(res,new List(1));
                     }
