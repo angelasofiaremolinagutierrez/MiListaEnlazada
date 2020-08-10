@@ -363,21 +363,19 @@ public class List implements ListInterface, Iterable<ListNode> {
     public List subList(ListNode from, ListNode to) {
         List lista = new List();
         ListNode n = head;
-        while (n.next != null){
+        while (n != null){
             if(n.equals(from)){
                 lista.add(n.getObject());
                 while (true){
-                    n=n.next;
-                    if (!n.equals(null)){
+                    n = n.next;
+                    if (n ==null){
+                        return lista;
+                    }else{
                         if(n.equals(to)){
-                            lista.add(n.getObject());
                             return lista;
                         }else{
                             lista.add(n.getObject());
                         }
-                    }else{
-                        System.out.println("El nodo final que ingresó no existe en la lista");
-                        return null;
                     }
                 }
 

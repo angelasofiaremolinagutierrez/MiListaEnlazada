@@ -52,7 +52,7 @@ public class Calculadora {
                 break;
             case "/": { //todo
                 List res = division(n1,n2);
-                System.out.println(res.inverse().listAsString());
+                System.out.println(res.listAsString());
             }
                 break;
         }
@@ -228,50 +228,67 @@ public class Calculadora {
     }
 
     public static List division(List n1,List n2){
-        //Aqui no necesitamos tener las listas invertidas, por lo cual las revertimos
-        n1 = n1.inverse();
-        n2 = n2.inverse();
-
         List cociente = new List();
 
-        ListNode node = n1.head;
-        int cifras = n2.getSize(); //numero de cifras a tomar en el dividendo
-        for (int i = 1; i <cifras ; i++) {
-            node = node.next;
-        }
+        if(esMayor(n1,n2)==1){
+            //Aqui no necesitamos tener las listas invertidas, por lo cual las revertimos
+            n1 = n1.inverse();
+            n2 = n2.inverse();
 
+            ListNode node = n1.head;
+            int cifras = n2.getSize(); //numero de cifras a tomar en el dividendo
+            for (int i = 0; i <cifras ; i++) {
+                node = node.next;
+            }
 
-        List dividendo = n1.subList(n1.head,node);
+            List dividendo = n1.subList(n1.head,node);
 
-        if(esMayor(dividendo.inverse(),n2.inverse()) == 1 || esMayor(dividendo.inverse(),n2.inverse()) == 0){
-          //continua
+            if(esMayor(dividendo.inverse(),n2.inverse()) == 1 || esMayor(dividendo.inverse(),n2.inverse()) == 0){
+                //continua
+            }else{
+                dividendo.add(node.getObject());
+                node = node.next;
+            }
+
+            while (true){
+                ListNode nodeTemp = dividendo.head;
+                for (int i = 0; i <dividendo.getSize()-(cifras-1) ; i++) {
+                    nodeTemp = nodeTemp.next;
+                }
+
+                List temp = dividendo.subList(dividendo.head,nodeTemp);
+                ListNode tempHead = temp.head;
+                String up = "";
+                for (int i = 0; i <temp.getSize() ; i++) {
+                    up += String.valueOf(tempHead.getObject());
+                    tempHead = tempHead.next;
+                }
+                int down = (int)n2.head.getObject();
+                int resParcial = Integer.parseInt(up)/down;
+                List cocienteTemp = new List(resParcial);
+                cociente.add(resParcial);
+
+                List multi = multiplicacion(n2.inverse(),cocienteTemp.inverse());
+                dividendo = resta(dividendo.inverse(),multi);
+                dividendo = dividendo.inverse();
+
+                //todo -> creo que falta comprobar si el dividendo es mayor al divisor, si es así creo que hay que cambiar el cociente
+
+                if(node == null){
+                    break;
+                }else{
+                    dividendo.add(node.getObject()); //se baja el siguiente
+                    node = node.next;
+                }
+            }
+            return cociente;
+        } else if(esMayor(n1, n2)==0){ //si son iguales
+            cociente = new List(1);
+            return cociente;
         }else{
-            dividendo = n1.subList(dividendo.head,node.next);
+            cociente = new List(0);
+            return cociente;
         }
-
-        while (node != null){
-            ListNode nodeTemp = dividendo.head;
-            for (int i = 1; i <dividendo.getSize()-(cifras-1) ; i++) {
-                nodeTemp = nodeTemp.next;
-            }
-            String up = "";
-            List temp = dividendo.subList(dividendo.head,nodeTemp);
-            ListNode tempHead = temp.head;
-            for (int i = 0; i <temp.getSize() ; i++) {
-                up += String.valueOf(tempHead.getObject());
-                tempHead = tempHead.next;
-            }
-            int down = (int)n2.head.getObject();
-            int resParcial = Integer.parseInt(up)/down;
-            cociente.add(resParcial);
-            List multi = multiplicacion(n1,cociente);
-            dividendo = resta(dividendo,multi);
-            //todo -> creo que falta comprobar si el dividendo es mayor al divisor, si es así creo que hay que cambiar el cociente
-            dividendo.add(node.next.getObject()); //se baja el siguiente
-        }
-
-
-        return cociente;
     }
 
     public static List divisionResta(List n1,List n2){
