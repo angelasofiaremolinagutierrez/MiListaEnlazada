@@ -54,26 +54,7 @@ public class List implements ListInterface, Iterable<ListNode> {
 
     @Override
     public Object get(ListNode node) {
-
-        ListNode actual = this.head;
-
-        while (true){
-            if(actual.next != null){
-                if(actual.toString().equals(node.toString())){
-                    return actual.getObject();
-                }
-                else{
-                    actual = actual.next;
-                }
-            }else{//si va en el ultimo
-                if(actual.toString().equals(node.toString())){
-                    return actual.getObject();
-                }else{
-                    System.out.println("Ese objeto no se encuentra en la lista");
-                    return null;
-                }
-            }
-        }
+        return node.getObject();
     }
 
     @Override

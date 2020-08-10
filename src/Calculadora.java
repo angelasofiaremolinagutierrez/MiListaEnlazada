@@ -42,13 +42,6 @@ public class Calculadora {
             case "-": {
                 List inv = resta(n1,n2);
                 System.out.println(inv.inverse().listAsString());
-                /*
-                if(esMayor(n1,n2) == -1){
-                    System.out.println("-"+input);
-                }else {
-                    System.out.println(input);
-                }
-                */
             }
                 break;
 
@@ -235,6 +228,53 @@ public class Calculadora {
     }
 
     public static List division(List n1,List n2){
+        //Aqui no necesitamos tener las listas invertidas, por lo cual las revertimos
+        n1 = n1.inverse();
+        n2 = n2.inverse();
+
+        List cociente = new List();
+
+        ListNode node = n1.head;
+        int cifras = n2.getSize(); //numero de cifras a tomar en el dividendo
+        for (int i = 1; i <cifras ; i++) {
+            node = node.next;
+        }
+
+
+        List dividendo = n1.subList(n1.head,node);
+
+        if(esMayor(dividendo.inverse(),n2.inverse()) == 1 || esMayor(dividendo.inverse(),n2.inverse()) == 0){
+          //continua
+        }else{
+            dividendo = n1.subList(dividendo.head,node.next);
+        }
+
+        while (node != null){
+            ListNode nodeTemp = dividendo.head;
+            for (int i = 1; i <dividendo.getSize()-(cifras-1) ; i++) {
+                nodeTemp = nodeTemp.next;
+            }
+            String up = "";
+            List temp = dividendo.subList(dividendo.head,nodeTemp);
+            ListNode tempHead = temp.head;
+            for (int i = 0; i <temp.getSize() ; i++) {
+                up += String.valueOf(tempHead.getObject());
+                tempHead = tempHead.next;
+            }
+            int down = (int)n2.head.getObject();
+            int resParcial = Integer.parseInt(up)/down;
+            cociente.add(resParcial);
+            List multi = multiplicacion(n1,cociente);
+            dividendo = resta(dividendo,multi);
+            //todo -> creo que falta comprobar si el dividendo es mayor al divisor, si es así creo que hay que cambiar el cociente
+            dividendo.add(node.next.getObject()); //se baja el siguiente
+        }
+
+
+        return cociente;
+    }
+
+    public static List divisionResta(List n1,List n2){
         List res = new List(0);
         if(esMayor(n1,n2)==1){
             List resta = n1;
@@ -269,6 +309,8 @@ public class Calculadora {
             if(n1.toString().equals(n2.toString())){
                 return 0;
             }else{
+                n1 = n1.inverse();
+                n2 = n2.inverse();
                 ListNode h1 = n1.head;
                 ListNode h2 = n2.head;
                 while (h1 != null){
